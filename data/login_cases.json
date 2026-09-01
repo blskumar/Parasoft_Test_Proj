@@ -1,0 +1,26 @@
+[
+  {
+    "name": "incorrect password",
+    "username": "testuser_87a9df3059",
+    "password": "WrongPassword123!",
+    "expected_error": "could not be verified"
+  },
+  {
+    "name": "unknown username",
+    "username": "user_that_does_not_exist",
+    "password": "Password123!",
+    "expected_error": "could not be verified"
+  },
+  {
+    "name": "empty credentials",
+    "username": "",
+    "password": "",
+    "expected_error": "Please enter a username and password"
+  },
+  {
+    "name": "whitespace credentials",
+    "username": "   ",
+    "password": "   ",
+    "expected_error": "could not be verified"
+  }
+]
