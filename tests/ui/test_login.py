@@ -16,5 +16,3 @@ def test_login_with_valid_registered_user(page, base_url, credentials):
     login_page.login(credentials["username"], credentials["password"])
 
     login_page.assert_logged_in()
-
-?
