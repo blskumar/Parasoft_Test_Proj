@@ -5,6 +5,7 @@ import pytest
 from playwright.sync_api import Playwright
 
 
+
 PROJECT_ROOT = Path(__file__).resolve().parent
 
 
@@ -69,3 +70,26 @@ def page(browser, base_url):
 #     )
 #     yield request
 #     request.dispose()
+
+
+# import pytest
+import allure
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    # Execute all other hooks to obtain the report object
+    outcome = yield
+    rep = outcome.get_result()
+
+    # Check if the test failed during execution
+    if rep.when == "call" and rep.failed:
+        # Check if the 'page' fixture is available in the test
+        if "page" in item.funcargs and allure is not None:
+            page = item.funcargs["page"]
+
+            # Attach a screenshot to the Allure report
+            screenshot = page.screenshot()
+            allure.attach(
+                screenshot,
+                name="screenshot_on_failure",
+                attachment_type=allure.attachment_type.PNG,
+            )

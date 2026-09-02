@@ -1,10 +1,13 @@
 import json
 from pathlib import Path
 
+import allure
+
 from pages.register import RegisterPage
 from playwright.sync_api import expect
 
-
+@allure.feature("User Registration")
+@allure.story("Register new user")
 def test_register_user(page, base_url):
     register_page = RegisterPage(page, base_url)
     password = "Password123!"
